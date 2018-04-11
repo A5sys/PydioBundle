@@ -1,0 +1,22 @@
+services:
+    pydio.directory_service:
+        class: A5sys\PydioBundle\Services\DirectoryService
+        arguments:
+            - '%pydio.login%'
+            - '%pydio.password%'
+            - '%pydio.base_api_url%'
+            - '%pydio.api_url%'
+    pydio.file_service:
+        class: A5sys\PydioBundle\Services\FileService
+        arguments:
+            - '%pydio.login%'
+            - '%pydio.password%'
+            - '%pydio.base_api_url%'
+            - '%pydio.api_url%'
+    pydio.search_service:
+        class: A5sys\PydioBundle\Services\SearchService
+        arguments:
+            - '%pydio.login%'
+            - '%pydio.password%'
+            - '%pydio.base_api_url%'
+            - '%pydio.api_url%'

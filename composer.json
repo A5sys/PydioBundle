@@ -1,0 +1,18 @@
+{
+  "name": "a5sys/pydio-bundle",
+  "type": "symfony-bundle",
+  "description": "Pydio API bundle",
+  "autoload": {
+    "psr-4": { "A5sys\\PydioBundle\\": "" }
+  },
+  "license": "MIT",
+  "require": {
+    "php": ">=5.4.0",
+    "symfony/framework-bundle": ">=2.3",
+    "guzzlehttp/guzzle": "^6.2@dev"
+  },
+  "require-dev": {
+    "phpunit/phpunit": "^7.1"
+  },
+  "minimum-stability": "dev"
+}

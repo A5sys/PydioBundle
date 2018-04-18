@@ -3,6 +3,7 @@
 namespace A5sys\PydioBundle\Services;
 
 use A5sys\PydioBundle\Exception\FileNotCreatedException;
+use A5sys\PydioBundle\Exception\FileNotFoundException;
 use A5sys\PydioBundle\Exception\FileNotRemovedException;
 
 /**
@@ -35,12 +36,26 @@ class FileService extends AbstractService
      * @param string $namespace
      * @param string $filename
      * @return mixed
+     * @throws FileNotFoundException
      */
     public function getFileContent(string $namespace, string $filename)
     {
         $uri = $this->apiUrl.'/'.static::API_V2_IO_COMMAND.'/'.$namespace.'/'.$filename;
 
-        return $this->exec($uri, 'GET', null, false);
+        $content = $this->exec($uri, 'GET', null, false);
+        // check error
+        libxml_use_internal_errors(true);
+        $xml = simplexml_load_string($content, "SimpleXMLElement", LIBXML_NOCDATA);
+        if ($xml) {
+            $json = json_encode($xml);
+            $result = json_decode($json, true);
+            if (isset($result['message'])) {
+                throw new FileNotFoundException($result['message']);
+            }
+        }
+        libxml_clear_errors();
+
+        return $content;
     }
 
     /**

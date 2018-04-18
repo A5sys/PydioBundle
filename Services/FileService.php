@@ -71,7 +71,7 @@ class FileService extends AbstractService
         $array = $this->exec($uri, 'DELETE');
 
         if (!array_key_exists('nodes_diff', $array)) {
-            throw new FileNotRemovedException('The resource '.$name.' could not be removed');
+            throw new FileNotRemovedException('The resource could not be removed');
         }
 
         return $array;

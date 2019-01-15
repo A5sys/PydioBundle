@@ -12,12 +12,14 @@ use A5sys\PydioBundle\Exception\DirectoryNotRemovedException;
 class DirectoryService extends AbstractService
 {
     /**
-     * @param string $namespace
+     * @param string  $namespace
+     * @param boolean $recursive
      * @return mixed
      */
-    public function ls(string $namespace)
+    public function ls(string $namespace, bool $recursive = false)
     {
-        $uri = $this->apiUrl.'/'.static::API_V2_FS_COMMAND.'/'.$namespace.'/?children=df';
+        $recursive = $recursive ? 'true' : 'false';
+        $uri = $this->apiUrl.'/'.static::API_V2_FS_COMMAND.'/'.$namespace.'/?children=dfz&recursive='.$recursive;
 
         return $this->exec($uri);
     }
